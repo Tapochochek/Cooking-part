@@ -31,6 +31,7 @@ public class LeverLimitEvents : MonoBehaviour
             atMin = true;
             atMax = false;
             Debug.Log("Минималка");
+            CloseDoor();
         }
         else if(angle>=max && !atMax)
         {
@@ -48,5 +49,10 @@ public class LeverLimitEvents : MonoBehaviour
     {
         targetPosition = door.transform.position + Vector3.up * openHeight;
         isOpening = true;
+    }
+    public void CloseDoor()
+    {
+        targetPosition = -(door.transform.position + Vector3.up * openHeight);
+        isOpening = false;
     }
 }
