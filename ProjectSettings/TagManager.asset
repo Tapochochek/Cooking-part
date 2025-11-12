@@ -8,6 +8,8 @@ TagManager:
   - RedTarget
   - Left hand
   - Right hand
+  - pan
+  - water
   layers:
   - Default
   - TransparentFX
