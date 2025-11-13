@@ -6,10 +6,12 @@ using UnityEngine.VFX;
 public class WashHandScript : MonoBehaviour
 {
     private VisualEffect effectSoap;
+    [SerializeField] private GameObject colpackOnTable;
+    [SerializeField] private GameObject colpackOnHead;
     private bool isWashing = false;
     private bool isSoap = false;
     private bool washComplete = false;
-    private float minusSize = 0.1f;
+    private float minusSize = 0.001f;
     int countSeconds = 0;
 
     private float timer = 0f;
@@ -23,7 +25,6 @@ public class WashHandScript : MonoBehaviour
         if (isSoap) {
             if (other.tag == "water")
             {
-                Debug.Log("dsdsds");
                 isWashing = true;
             }
         }       
@@ -33,7 +34,6 @@ public class WashHandScript : MonoBehaviour
         if (isSoap) {
             if(other.tag == "water")
             {
-                Debug.Log("dsdsds");
                 isWashing = false;
             }
         }
@@ -44,26 +44,29 @@ public class WashHandScript : MonoBehaviour
         isSoap=true;
         effectSoap.gameObject.SetActive(true);
     }
+    public void ClickColpack()
+    {
+        colpackOnHead.SetActive(true);
+        colpackOnTable.SetActive(false);
+    }
     private void Update()
     {
         if (!washComplete && isWashing)
         {
-            Debug.Log("start washing");
-            if (countSeconds<60)
+            if (countSeconds<20)
             {
-                timer += Time.deltaTime;
-                Debug.Log(timer);
+                timer += Time.deltaTime;               
                 if (timer >= 1f)
                 {
-                    timer = 0f;
-                    Debug.Log("Уменьшение");
+                    timer = 0f;                   
                     countSeconds++;
-                    effectSoap.SetFloat("waterAmount", minusSize);
+                    effectSoap.SetFloat("water", effectSoap.GetFloat("water") - minusSize);
+                    effectSoap.Reinit();
                 }               
             }
             else
             {
-                Debug.Log("Все");
+                effectSoap.gameObject.SetActive(false);
                 washComplete = true;
             }
         }
