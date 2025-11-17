@@ -10,6 +10,9 @@ TagManager:
   - Right hand
   - pan
   - water
+  - board
+  - cup
+  - carrotPart
   layers:
   - Default
   - TransparentFX

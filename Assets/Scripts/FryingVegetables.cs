@@ -52,6 +52,7 @@ public class FryingVegetables : MonoBehaviour
         int i = 0;
         while (i<40)
         {
+            Debug.Log(i);
             i++;
             yield return new WaitForSeconds(1);           
         }
